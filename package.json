@@ -8,7 +8,7 @@
   "scripts": {
     "heroku-postbuild": "ng build ",
     "ng": "ng",
-    "start": "node app.js",
+    "start": "nodemon",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
