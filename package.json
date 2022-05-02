@@ -6,7 +6,7 @@
     "npm": "6.14.13"
   },
   "scripts": {
-    "heroku-postbuild": "ng build --prod",
+    "heroku-postbuild": "ng build ",
     "ng": "ng",
     "start": "node app.js",
     "build": "ng build",
