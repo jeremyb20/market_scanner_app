@@ -1,0 +1,24 @@
+.card:hover {
+    transition: transform .3s cubic-bezier(.155,1.105,.295,1.12),box-shadow .3s;
+    transform: scale(1.01);
+    box-shadow: 0 6px 10px #bbc2c9, 0 0 6px rgb(0 0 0 / 5%);
+}
+.card-theme-default {
+    background-color: var(--color-blue);
+    color: var(--first-color-light);
+}
+
+.card-theme-default-dark {
+    background-color: var(--dark-bg-color);
+    color: var(--color-light);
+}
+
+.card-theme-premium {
+    background-color: var(--premium-bg-color);
+    color: var(--color-light);
+}
+
+.card-theme-gradient {
+  background: var(--gradient-bg-color);
+  color: var(--color-light);
+}

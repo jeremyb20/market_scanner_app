@@ -1,0 +1,53 @@
+<div class="row" style="margin: 0px;">
+  <div class="col-12 col-sm-6"  [ngClass]="{'mt-4': Media.IsMobile}">
+    <div class="card-profile shadow">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <h4 for="darkTheme"> {{ 'HOME.THEME.TEXT' | translate }}: <span>{{currentTheme}}</span></h4>
+        <div class="row row-cols-1 row-cols-md-1 g-4 mt-1">
+          <div class="col">
+            <div (click)="setTheme('theme-default')"class="card card-theme-default">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ 'HOME.THEME.DEFAULT' | translate }}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div (click)="setTheme('theme-default-dark')"class="card card-theme-default-dark">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ 'HOME.THEME.DARK' | translate }}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div (click)="setTheme('theme-premium')"class="card card-theme-premium">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ 'HOME.THEME.PREMIUM' | translate }}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div (click)="setTheme('theme-gradient')"class="card card-theme-gradient">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{ 'HOME.THEME.GRADIENT' | translate }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6"  [ngClass]="{'mt-4': Media.IsMobile}">
+    <div class="card-profile shadow">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <h4>{{ 'HOME.TITLE' | translate }}</h4>
+        <label>
+          {{ 'HOME.SELECT' | translate }}
+          <select class="form-select" #langSelect  (change)="changetranslator(langSelect.value)">
+            <option *ngFor="let lang of _translate.getLangs()" [value]="lang" [selected]="lang === _translate.currentLang()">{{ lang }}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+

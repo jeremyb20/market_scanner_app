@@ -1,0 +1,68 @@
+<div *ngIf="user === 'Administrador'" class="sidebar-admin">
+    <nav id="nav" class="navbar nav navbar-expand-lg navbar-light bg-admin sticky-top">
+      <div class="container-fluid">
+        
+        <a [routerLink]="'/admin'" [routerLinkActive]="['active']" class="navbar-brand d-none d-md-block nav-link nav_link waves-effect waves-light"><i class='far fa-user nav_icon me-2'></i> <span class="nav_name">Admin</span></a>
+        <div class="d-flex">
+          <div class="height d-flex justify-content-start align-items-start">
+            <div class="search">
+                <i class="fas fa-search"></i> <input type="text" class="form-control" placeholder="Buscar..."> <button class="btn btn-primary">Buscar</button>
+            </div>
+          </div>
+        </div>
+        <div class="offcanvas offcanvas-start-lg bg-admin align-items-end" [ngClass]="{'align-items-end': !Media.IsMobile}" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-white" id="offcanvasExampleLabel">
+              <a [routerLink]="'/admin'" [routerLinkActive]="['active']" class="nav-link nav_link waves-effect waves-light me-4">
+                <i class='far fa-user nav_icon'></i> <span class="nav_name">Admin</span>
+              </a>
+            </h5>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a [routerLink]="'/permissions'" [routerLinkActive]="['active']" class="nav-link nav_link waves-effect waves-light me-4">
+                  <i class='fas fa-user-lock nav_icon'></i> <span class="nav_name">Permisos</span>
+                </a>
+              </li>
+              <li class="nav-item d-lg-none d-xl-none" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a [routerLink]="'/dashboard'" [routerLinkActive]="['active']" class="nav-link nav_link waves-effect waves-light me-4">
+                  <i class='far fa-user nav_icon'></i> <span class="nav_name">Mi cuenta</span>
+                </a>
+              </li>
+              <li class="nav-item d-md-none d-lg-none d-xl-none" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a (click)="logout()" class="nav-link nav_link waves-effect waves-light">
+                  <i class='fas fa-sign-out-alt nav_icon'></i> <span class="nav_name">Cerrar Sesion</span>
+                </a>
+              </li>
+              <li class="nav-item dropdown d-none d-sm-none d-md-block" [ngClass]="{'mb-4' : Media.IsMobile}">
+                <a class="nav-link dropdown-toggle waves-effect waves-light nav-link nav_link" id="navbarDropdownMenuLink-4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cog nav_icon"></i> Configuración </a>
+                <div class="dropdown-menu dropdown-menu-left dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/profile-admin'"><i class='fas fa-user nav_icon'></i> <span class="nav_name">Mi perfil</span> </a>
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/configuration-admin'"><i class="fas fa-cog nav_icon"></i> <span class="nav_name">Configuración</span> </a>
+                  <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" (click)="logout()"><i class='fas fa-sign-out-alt nav_icon'></i> <span class="nav_name">Cerrar Sesion</span> </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn navbar-toggler border-3 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+    <div class="container-fluid pt-3">
+      <ng-http-loader 
+        [backdrop]="true" 
+        [backgroundColor]="'#ff0000'" 
+        [debounceDelay]="100" 
+        [extraDuration]="1000" 
+        [minDuration]="1000" 
+        [opacity]="opacity" 
+        [backdropBackgroundColor]="'#0a0a0a'" 
+        [spinner]="spinkit.skWave">
+      </ng-http-loader>
+      <router-outlet></router-outlet>
+    </div>
+  </div>

@@ -1,0 +1,296 @@
+/* You can add global styles to this file, and also import other style files */
+@import './scss/partials/bootstrap-breakpoints';
+@import './scss/custom-variables.scss';
+@import './scss/fontawesome5/fontawesome';
+@import './scss/fontawesome5/regular';
+@import './scss/fontawesome5/solid';
+@import './scss/fontawesome5/brands';
+@import './scss/themes/theme-default.scss';
+@import './scss/themes/theme-default-dark.scss';
+@import './scss/themes/theme-premium.scss';
+@import './scss/themes/theme-gradient.scss';
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+body {
+  background: var(--background);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none
+}
+
+:root {
+  --primary-color: #fff;
+  --background-color: #e5e5e5;
+  --background: -webkit-linear-gradient(left, #be1064, #4c1d55);
+  --text-color: #2d2d2d;
+  --bg: #fffdf2;
+}
+
+.input-group-text {
+ height: 38px;
+}
+
+.ng-select {
+ padding: 0px;
+}
+
+.modal-backdrop {
+ z-index: auto !important;
+}
+
+.ng-select .ng-select-container {
+  color: #333;
+  background-color: #bbbbbb;
+  border-radius: 4px;
+  border:none !important;
+  min-height: 0px !important;
+  align-items: center !important;
+}
+
+.fc .fc-toolbar-title {
+ text-transform: capitalize !important;
+ @include media-breakpoint-down(md) {
+   font-size: 11px !important;
+ }
+}
+
+.homeBody{
+
+  .card-login {
+    border: none;
+    max-width: 400px;
+    box-shadow: 7px 6px 5px 0px #1d2655;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  ::placeholder {
+    color: #837d7d;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: #837d7d;
+  }
+
+  ::-ms-input-placeholder {
+    color: #837d7d;
+  }
+
+  input {
+    margin-bottom: 3px;
+    margin-top: 0.7rem;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 0;
+    background: rgb(196 196 196 / 19%);
+    border: 0.5px solid #f4f4f4;
+  }
+
+  input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+    border-radius: 0px;
+    background: rgb(196 196 196 / 19%);
+  }
+
+  .top-header-card {
+    background-color: var(--color-blue);
+    border-radius: 0;
+    border: 0;
+    padding: 1rem 0.5rem;
+  }
+
+  .main-logo-login {
+    img {
+      max-width: 10rem;
+    }
+
+    .logo-box {
+      background-image: url('../src/assets/images/LogoFont.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 9rem;
+      height: 3rem;
+      display: inline-block;
+
+    }
+  }
+
+  .text-dim {
+    color: #747373;
+  }
+
+  .text-recover-password {
+    color: #747373;
+
+    font-size: 12px;
+  }
+
+  .text-recover-password:hover {
+    color: black;
+  }
+
+  .input-wrap-password {
+    position: relative;
+    z-index: 1;
+
+    input{
+      padding-right: 3rem;
+    }
+
+    .icon-view-password {
+      position: absolute;
+      right: 9px;
+      top: 19px;
+      z-index: 3;
+    }
+  }
+  .form-control:focus {
+    border-color: var(--color-blue);
+  }
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+
+.btn-home {
+  border: 2px solid var(--color-blue);
+  background-color: var(--color-blue);
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn-home:hover {
+  background-color: #1076bb;
+  border: 2px solid #1076bb;
+  color: #fff;
+}
+
+
+
+.swal2-title {
+ font-size: 22px !important;
+ text-align: left;
+ margin: 0;
+}
+
+.swal2-content {
+ padding: 10px !important;
+ font-size: 16px !important;
+}
+
+.swal2-container.sw-leave-container {
+ .swal2-header {
+     background-color: var(--color-primary-800);
+     padding: 8px;
+     align-items: flex-start;
+ }
+ .swal2-title {
+   font-size: 0.875em !important;
+   text-align: left;
+   color: transparentize(#fff, 0.125);
+   margin: 0;
+ }
+ .swal2-content {
+     padding: 15px;
+     font-size: 16px;
+ }
+ .swal2-actions {
+     padding: 0 8px 8px 8px;
+     margin: 0;
+     align-items: flex-end;
+ }
+}
+.swal2-popup {
+ margin-top: 2em;
+}
+
+@media (min-width : 992px) {
+  .offcanvas {
+    visibility      : visible;
+    position        : relative;
+    background      : none;
+    border          : none;
+    justify-content : end;
+    color           : red;
+  }
+}
+@media (max-width : 992px) {
+  .offcanvas {
+    width : 250px !important;
+  }
+  .offcanvas-start-lg {
+    top          : 0;
+    left         : 0;
+    border-right : 1px solid rgba(0, 0, 0, .2);
+    transform    : translateX(-100%);
+  }
+
+  .zui-table .zui-sticky-col{
+    height: -webkit-fill-available !important;
+  }
+}
+
+.spinner-border {
+  height: 15px;
+  width: 15px;
+}
+.text-right {
+  text-align: right;
+}
+
+.zui-wrapper{
+  margin-top: 5px;
+}
+
+.blue{
+  color:#337ab7 !important
+}
+
+button:focus:not(:focus-visible) {
+    outline: 0;
+    border: none;
+}
+
+.jarviswidget header {
+  padding: 6px 5px !important;
+  border-radius: 0px 5px 0px 0px !important;
+}
+
+.jarviswidget > div {
+  border-radius: 0px 0px 5px 5px !important;
+}
+
+.col-sm-8, .col-sm-4, .col-sm-12 {
+  transition: 0.5s;
+}
+
+.text-underline:hover{
+  color: black;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}

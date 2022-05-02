@@ -1,0 +1,109 @@
+<div class="row g-0">
+  <div [ngClass]="{'col-sm-8': showCardBrand, 'col-sm-12':!showCardBrand}">
+    <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data" [options]="options" [columns]="columns">
+        <ngx-caption>
+            <div class="row p-1">
+                <div class="col-sm-6 col-xs-6 col-6 ">
+                    <b>
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                        Usuarios Smart Shop
+                    </b>
+                </div>
+                <div class="col-sm-6 col-xs-6 col-6  text-end">
+                  <button type="button" class="btn btn-secondary" (click)="createOrEditModalUser([],'Nuevo Usuario', true)">
+                      <i class="fa fa-plus" aria-hidden="true"></i> Crear Usuario
+                  </button>
+                </div>
+            </div>
+        </ngx-caption>
+        <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
+          <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit" (click)="createOrEditModalUser(row, 'Editar Marca', false)"><i class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+          <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close" (click)="deleteUser(row)"><i class="fas fa-trash text-danger"></i></a>
+        </ng-template>
+    </ngx-datatable>
+  </div>
+  <div *ngIf="showCardRightUser" class="col-sm-4 px-3">
+    <div class="homeBody">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+          <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
+        </div>
+        <form class="form-signin" [formGroup]="brandsForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Código Marca</label>
+              <div class="input-group input-wrap-password">
+                <input name="codigoMarca" formControlName="codigoMarca" class="form-control" id="codigoMarca" [ngClass]="{ 'is-invalid': submitted && f.codigoMarca.errors }" placeholder="Inserte el código">
+                <div *ngIf="submitted && f.codigoMarca.errors" class="invalid-feedback">
+                  <div *ngIf="f.codigoMarca.errors.required">Código marca es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Descripción marca</label>
+              <div class="input-group input-wrap-password">
+                <input name="descripcionMarca" formControlName="descripcionMarca" class="form-control" id="descripcionMarca" [ngClass]="{ 'is-invalid': submitted && f.descripcionMarca.errors }" placeholder="Inserte la descripción">
+                <div *ngIf="submitted && f.descripcionMarca.errors" class="invalid-feedback">
+                  <div *ngIf="f.descripcionMarca.errors.required">Descripción marca es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+              <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" (click)="hideCard()">Cancelar</button>
+            <button type="submit" class="btn btn-block btn-home btn-sm">
+              {{buttonText}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newInventoryModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="newInventoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="form-signin" [formGroup]="brandsForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Código Marca</label>
+            <div class="input-group input-wrap-password">
+              <input name="codigoMarca" formControlName="codigoMarca" class="form-control" id="codigoMarca" [ngClass]="{ 'is-invalid': submitted && f.codigoMarca.errors }" placeholder="Inserte el código">
+              <div *ngIf="submitted && f.codigoMarca.errors" class="invalid-feedback">
+                <div *ngIf="f.codigoMarca.errors.required">Código marca es requerida</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Descripción marca</label>
+            <div class="input-group input-wrap-password">
+              <input name="descripcionMarca" formControlName="descripcionMarca" class="form-control" id="descripcionMarca" [ngClass]="{ 'is-invalid': submitted && f.descripcionMarca.errors }" placeholder="Inserte la descripción">
+              <div *ngIf="submitted && f.descripcionMarca.errors" class="invalid-feedback">
+                <div *ngIf="f.descripcionMarca.errors.required">Descripción marca es requerida</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+            <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-block btn-home btn-sm">
+            {{buttonText}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

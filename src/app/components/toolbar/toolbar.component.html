@@ -1,0 +1,107 @@
+
+<div class="header" id="header">
+  <div class="col-9">
+      <div class="height d-flex justify-content-start align-items-start">
+          <div class="search">
+              <i class="fas fa-search"></i> <input type="text" class="form-control" placeholder="Buscar..."> <button class="btn btn-primary">Buscar</button>
+          </div>
+      </div>
+  </div>
+  <div class="col-3 d-flex justify-content-end">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a *ngIf="Media.IsMobile" class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <div class="header_img">
+                <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="companyName">
+            </div>
+        </a>
+        <a *ngIf="!Media.IsMobile" class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-cog"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/profile'"><i class='fas fa-user nav_icon'></i> Mi perfil</a>
+          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/configuration'"> <i class="fas fa-cog nav_icon"></i> Configuración</a>
+          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" data-bs-toggle="modal" data-bs-target="#passwordModal"><i class="fas fa-lock nav_icon"></i> Cambiar Contraseña</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+   <!-- Modal -->
+   <div class="modal fade homeBody" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="passwordModalLabel">Cambiar Contraseña</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="form-signin" [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Contraseña actual</label>
+              <div class="input-group input-wrap-password">
+                <input name="password" [type]="showPasswordEmailSent ? 'text' : 'password'" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+                <div class="icon-view-password">
+                  <i alt="show" class="fas fa-lock-open lock-show" (click)="showPasswordEmailSent = !showPasswordEmailSent" *ngIf="showPasswordEmailSent"></i>
+                  <i alt="hide" class="fas fa-lock lock-hide" (click)="showPasswordEmailSent = !showPasswordEmailSent" *ngIf="!showPasswordEmailSent"></i>
+                </div>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Contraseña actual es requerida</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Nueva Contraseña</label>
+              <div class="input-group input-wrap-password">
+                <input name="newPassword" minlength="6" [type]="showNewPassword ? 'text' : 'password'" formControlName="newPassword" class="form-control" id="newPassword" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+                <div class="icon-view-password">
+                  <i alt="show" class="fas fa-lock-open lock-show" (click)="showNewPassword = !showNewPassword" *ngIf="showNewPassword"></i>
+                  <i alt="hide" class="fas fa-lock lock-hide" (click)="showNewPassword = !showNewPassword" *ngIf="!showNewPassword"></i>
+                </div>
+                <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.newPassword.errors.required">Nueva contraseña es requerida</div>
+                  <div *ngIf="f.newPassword.errors.minlength">Contraseña debe ser al menos 6 digitos</div>
+                  <div *ngIf="f.newPassword.errors.maxlength">Contraseña maxima de 20 digitos</div>
+                    <div *ngIf="f.newPassword.errors.pattern">Contraseña debe contener al menos 1 número, 1 mayúscula, 1 minúscula, 1 caracter especial (!@#$%^&*)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label class="mb-0 fw-bold">Confirmar Contraseña</label>
+              <div class="input-group input-wrap-password">
+                <input name="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" class="form-control" id="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+                <div class="icon-view-password">
+                  <i alt="show" class="fas fa-lock-open lock-show" (click)="showConfirmPassword = !showConfirmPassword" *ngIf="showConfirmPassword"></i>
+                  <i alt="hide" class="fas fa-lock lock-hide" (click)="showConfirmPassword = !showConfirmPassword" *ngIf="!showConfirmPassword"></i>
+                </div>
+                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirmPassword.errors.required">Confirmación de contraseña es requerida</div>
+                  <div *ngIf="f.confirmPassword.errors.mustMatch">Las contraseñas deben coincidir</div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+              <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-block btn-home btn-sm">
+            Actualizar Contraseña
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>

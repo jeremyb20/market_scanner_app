@@ -1,0 +1,78 @@
+<div class="homeBody container-fluid px-4 px-md-4 py-4 mx-auto">
+  <div class="row g-0 justify-content-center">
+    <div class="card mb-3">
+      <div class="text-center px-4 pt-2 pb-0">
+        <img src="../../../assets/images/LogoFont.png" width="100% auto" alt="Font_Corp_Logo">
+      </div>
+      <div class="card-body pt-1">
+        <form class="form-signin" [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Contraseña actual</label>
+            <div class="input-group input-wrap-password">
+              <input name="password" [type]="showPasswordEmailSent ? 'text' : 'password'" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+              <div class="icon-view-password">
+                <i alt="show" class="fas fa-lock-open lock-show" (click)="showPasswordEmailSent = !showPasswordEmailSent" *ngIf="showPasswordEmailSent"></i>
+                <i alt="hide" class="fas fa-lock lock-hide" (click)="showPasswordEmailSent = !showPasswordEmailSent" *ngIf="!showPasswordEmailSent"></i>
+              </div>
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Contraseña actual es requerida</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Nueva Contraseña</label>
+            <div class="input-group input-wrap-password">
+              <input name="newPassword" [type]="showNewPassword ? 'text' : 'password'" formControlName="newPassword" class="form-control" id="newPassword" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+              <div class="icon-view-password">
+                <i alt="show" class="fas fa-lock-open lock-show" (click)="showNewPassword = !showNewPassword" *ngIf="showNewPassword"></i>
+                <i alt="hide" class="fas fa-lock lock-hide" (click)="showNewPassword = !showNewPassword" *ngIf="!showNewPassword"></i>
+              </div>
+              <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.newPassword.errors.required">Nueva contraseña es requerida</div>
+                <div *ngIf="f.newPassword.errors.minlength">Contraseña debe ser al menos 6 digitos</div>
+                <div *ngIf="f.newPassword.errors.maxlength">Contraseña maxima de 20 digitos</div>
+                  <div *ngIf="f.newPassword.errors.pattern">Contraseña debe contener al menos 1 número, 1 mayúscula, 1 minúscula, 1 caracter especial (!@#$%^&*)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label class="mb-0 fw-bold">Confirmar Clave</label>
+            <div class="input-group input-wrap-password">
+              <input name="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" class="form-control" id="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;">
+              <div class="icon-view-password">
+                <i alt="show" class="fas fa-lock-open lock-show" (click)="showConfirmPassword = !showConfirmPassword" *ngIf="showConfirmPassword"></i>
+                <i alt="hide" class="fas fa-lock lock-hide" (click)="showConfirmPassword = !showConfirmPassword" *ngIf="!showConfirmPassword"></i>
+              </div>
+              <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirmación de clave es requerida</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Las claves deben coincidir</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-4">
+            <div class="col-12 d-grid gap-2">
+              <button type="submit" class="btn btn-block btn-home btn-sm">
+                Actualizar Clave
+                <div *ngIf="loading" class="ms-3 spinner-border text-light" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="text-end">
+            <a (click)="logout()" class="text-sm mx-auto my-2 text-recover-password"> <i class='fas fa-sign-out-alt nav_icon me-2'></i> <span class="nav_name">Cerrar Sesión</span></a>
+          </div>
+
+          <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
+            <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

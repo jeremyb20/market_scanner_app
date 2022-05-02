@@ -1,0 +1,54 @@
+{
+    "HOME": {
+        "TEXT": "HOME",
+        "TITLE": "The configuration is in English!",
+        "SELECT": "Change language",
+        "TOAST": "Show Toast",
+        "THEME": {
+          "TEXT": "Theme Selected",
+          "DEFAULT": "Theme Blue",
+          "DARK": "Dark Theme",
+          "PREMIUM": "Premium Theme",
+          "GRADIENT": "Gradient Theme"
+        },
+        "TABLE": {
+            "COUNTRY": "Country",
+            "AREA": "Area",
+            "POPULATION": "Population"
+        }
+    },
+    "ADMIN": {
+        "NAVBAR": {
+          "PERMISSIONS": "Permissions",
+          "CONFIGURATION": {
+            "PROFILE": "Profile",
+            "CONFIGURATION": "Settings",
+            "LOGOUT": "log out"
+          }
+        }
+    },
+    "USER": {
+        "NAVBAR": {
+          "DASHBOARD": "Dashboard",
+          "SCANNER": "Scanner",
+          "STRUCTURES": {
+            "TEXT": "Structures",
+            "INVENTORY": "Inventory",
+            "USERS": "Users"
+          },
+          "SELLERS": {
+            "TEXT": "Sellers",
+            "MAINTENANCESELLERS": "Maintenance Sellers",
+            "STRUCTURESELLERS": "Estructure Sellers"
+          },
+          "PROYECTS": "Proyects",
+          "OPPORTUNITIES": "Opportunities",
+          "MANAGEMENTS": "Managements",
+          "ACTIVITIES": "Activities",
+          "QUOTES": "Quotes",
+          "REPORTS": "Reports",
+          "SECURITY": "Security",
+          "LOGOUT": "Logout"
+        }
+    }
+}

@@ -1,0 +1,62 @@
+.notifications {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    min-width: 250px;
+    max-width: 250px;
+    font-size: 12px;
+
+    .notification {
+      margin: 5px;
+      border-radius: 5px;
+      color: #fff;
+      overflow: hidden;
+  
+      .title {
+        background: rgba(0, 0, 0, 0.6);
+        padding-left: 10px;
+        font-weight: bold;
+      }
+
+      .animateOpen{
+        animation:moveOpen 4s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+      }
+      /* Safari and Chrome */
+      @keyframes moveOpen {
+        from {-webkit-transform: translate(0,-100px);}
+        10% {-webkit-transform: translate(0,20px);}
+        12% {-webkit-transform: translate(0,22px);}
+        16% {-webkit-transform: translate(0,20px);}
+        80% {-webkit-transform: translate(0,20px);}
+        85% {-webkit-transform: translate(0,25px);}
+        to {-webkit-transform: translate(0,-100px);}
+      }
+  
+      .message {
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+  
+      &.info {
+        background-color: rgba(189, 189, 189, 0.9);
+      }
+  
+      &.success {
+        background-color: rgba(27, 158, 119, 0.9);
+      }
+  
+      &.warning {
+        background-color: rgba(217, 95, 2, 0.9);
+      }
+  
+      &.error {
+        background-color: rgba(246, 71, 71, 0.9);
+      }
+    }
+  }
+  
