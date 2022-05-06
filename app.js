@@ -10,7 +10,6 @@ const app = express();
 
 //settings
 app.set('views', path.join(__dirname, 'public'));
-app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors())
 app.use(morgan('dev'));
@@ -33,6 +32,12 @@ const storage = multer.diskStorage({
   }
 });
 app.use(multer({storage}).single('image'));
+
+// Start Server
+app.use(express.static(__dirname + '/dist/super-market'));
+app.get('/*', function(_req,res){
+    res.sendFile(path.join(__dirname+'/dist/super-market/index.html'))
+})
 
 app.use("/api/employees", require('./back-end/routes/employees.routes'));
 app.use("/api/users", require('./back-end/routes/users.routes'));
