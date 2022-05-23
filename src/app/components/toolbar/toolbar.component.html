@@ -1,6 +1,11 @@
 
 <div class="header" id="header">
-  <div class="col-9">
+  <div *ngIf="!Media.IsLandscape" class="col-3">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <div class="col-6">
       <div class="height d-flex justify-content-start align-items-start">
           <div class="search">
               <i class="fas fa-search"></i> <input type="text" class="form-control" placeholder="Buscar..."> <button class="btn btn-primary">Buscar</button>
@@ -18,11 +23,14 @@
         <a *ngIf="!Media.IsMobile" class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fas fa-cog"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/profile'"><i class='fas fa-user nav_icon'></i> Mi perfil</a>
-          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" [routerLink]="'/configuration'"> <i class="fas fa-cog nav_icon"></i> Configuración</a>
-          <a class="dropdown-item waves-effect waves-light nav-link nav_link p-2" data-bs-toggle="modal" data-bs-target="#passwordModal"><i class="fas fa-lock nav_icon"></i> Cambiar Contraseña</a>
-        </div>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow dropdown-right" aria-labelledby="navbarDropdownMenuLink-4">
+          <li><a class="dropdown-item" [routerLink]="'/profile'"><i class='fas fa-user nav_icon me-2'></i> Perfil</a></li>
+          <li><a class="dropdown-item" [routerLink]="'/configuration'"><i class="fas fa-cog nav_icon me-2"></i> Configuración</a></li>
+          <li>
+              <hr class="dropdown-divider">
+          </li>
+          <li><a (click)="logout()" class="dropdown-item" href="#"><i class='fas fa-sign-out-alt nav_icon me-2'></i>  {{ 'USER.NAVBAR.LOGOUT' | translate }}</a></li>
+      </ul>
       </li>
     </ul>
   </div>

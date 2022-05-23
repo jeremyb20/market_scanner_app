@@ -5,7 +5,7 @@ const cloudinary = require('./../cloudinary.config');
 const fs = require('fs-extra');
 const moment = require('moment');
 
-inventoryCtl.getAllInventory = async ( req,res )=> {
+inventoryCtl.getAllInventory = async ( _req,res )=> {
   const inventory = await Inventory.find();
   if(inventory.length == 0){
     res.json({ success: false, message: 'No hay lista de inventarios disponibles'});

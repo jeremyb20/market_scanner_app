@@ -28,12 +28,12 @@ export class UsersComponent implements OnInit {
   data: any = [];
   options: any = Options;
 
-  brandsForm: FormGroup;
+  userForm: FormGroup;
   currentTheme: any;
   submitted: boolean = false;
   hideMsg: boolean = false;
-  showCardBrand: boolean = false;
-  showCardRightUser: boolean = false;
+  showUserCard: boolean = false;
+  showUserRightCard: boolean = false;
   ShowMsg: string = '';
   newInventoryModal: any;
   title: any =  '';
@@ -41,33 +41,39 @@ export class UsersComponent implements OnInit {
   editOrNewOption: boolean;
 
   constructor(private _media: MediaService, private titleService: Title, private formBuilder: FormBuilder, private themeService: ThemeService, private http: HttpClient, private _authService: AuthService, private _notificationService: NotificationService) {
-    this.titleService.setTitle('Inventario  | Smart Shop');
+    this.titleService.setTitle('Lista de Usuarios  | Smart Shop');
     this.currentTheme = this.themeService.getThemeSelected();
     this.getUserByCatalog();
 
     this.mediaSubscription = this._media.subscribeMedia().subscribe(media => {
       this.Media = media;
       if(this.Media.IsMobile){
-        this.showCardBrand = false;
-        this.showCardRightUser = false;
+        this.showUserCard = false;
+        this.showUserRightCard = false;
       }
     });
   }
 
-  get f() { return this.brandsForm.controls; }
+  get f() { return this.userForm.controls; }
 
   ngOnInit() {
-    this.brandsForm = this.formBuilder.group(
+    this.userForm = this.formBuilder.group(
       {
-        idMarca: ['0',Validators.required],
-        codigoMarca: ['',Validators.required],
-        descripcionMarca: ['',Validators.required]
+        idUser: ['0',Validators.required],
+        username: ['',Validators.required],
+        email: ['',Validators.required],
+        userRol: ['',Validators.required],
+        password: ['',Validators.required],
+        theme: ['',Validators.required]
+
       }
     );
 
     this.columns = [
       { key: 'username', title: 'Nombre', width: 100,pinned: false, sorting: true },
       { key: 'email', title: 'Correo', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
+      { key: 'userRol', title: 'Rol de usuario', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
+      { key: 'theme', title: 'Color del Tema', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
       { key: 'createdAt', title: 'Fecha Creación', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
       { key: 'updatedAt', title: 'Fecha actualización', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
       { key: 'accion', title: '<div class="blue">Acción</div>', align: { head: 'center', body:  'center' }, sorting: false, width: 80, cellTemplate: this.actionEditAndDelete }
@@ -96,26 +102,29 @@ export class UsersComponent implements OnInit {
 
   createOrEditModalUser(item:any,title:any, isNewBrand:boolean){
     this.title = title;
-    this.buttonText = (isNewBrand)? 'Crear Nueva Marca': 'Editar Marca';
+    this.buttonText = (isNewBrand)? 'Crear Usuario': 'Editar Usuario';
     this.editOrNewOption = isNewBrand;
     this.hideMsg = false;
-    this.brandsForm = this.formBuilder.group(
+    this.userForm = this.formBuilder.group(
       {
-        idMarca : [(isNewBrand)? '0': item.IdMarca ,Validators.required],
-        codigoMarca : [(isNewBrand)? '': item.CodigoMarca, Validators.required],
-        descripcionMarca: [(isNewBrand)? '': item.DescripcionMarca, Validators.required]
+        idUser : [(isNewBrand)? '0': item._id ,Validators.required],
+        username : [(isNewBrand)? '': item.username, Validators.required],
+        email: [(isNewBrand)? '': item.email, Validators.required],
+        userRol: [(isNewBrand)? '': item.userRol, Validators.required],
+        password: [(isNewBrand)? '': item.password, Validators.required],
+        theme: [(isNewBrand)? '': item.theme, Validators.required]
       }
     );
 
     if(!this.Media.IsMobile){
-      this.showCardBrand = true;
-      if(this.showCardBrand){
+      this.showUserCard = true;
+      if(this.showUserCard){
         setTimeout(() => {
-          this.showCardRightUser = true;
+          this.showUserRightCard = true;
         }, 510);
       }else{
-        this.showCardBrand  = false;
-        this.showCardRightUser = false;
+        this.showUserCard  = false;
+        this.showUserRightCard = false;
       }
     }else{
       this.newInventoryModal.show();
@@ -156,40 +165,50 @@ export class UsersComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.brandsForm.invalid) {
+    if (this.userForm.invalid) {
       return;
     }
 
-    const brand = {
-      IdMarca: this.editOrNewOption ? 0: this.f.idMarca.value,
-      CodigoMarca: this.f.codigoMarca.value,
-      DescripcionMarca: this.f.descripcionMarca.value
+    const userSelect = {
+      _id: this.editOrNewOption ? 0: this.f.idUser.value,
+      username: this.f.username.value,
+      email: this.f.email.value,
+      userRol: this.f.userRol.value,
+      password: this.f.password.value,
+      theme: this.f.theme.value,
+      isNew: this.editOrNewOption,
+      lang: 'es'
     }
-    this._authService.postCreateOrEditUser(this.editOrNewOption, brand).subscribe((response:any) => {
-      if(response.success) {
-        this.submitted = false;
-        this.getResponseByService(false, '');
-        this.getUserByCatalog();
-        this.close();
-        this._notificationService.success('Información del sistema' , response.msg , 6000);
-      } else {
-        this.getResponseByService(true, response.msg);
+    this._authService.postCreateOrEditUser(this.editOrNewOption, userSelect).subscribe({
+      next: (result: any) => {
+        if (result.success) {
+          this.submitted = false;
+          this.getResponseByService(false, '');
+          this.getUserByCatalog();
+          this.close();
+          this._notificationService.success('Información del sistema' , result.message , 6000);
+        } else {
+          this.getResponseByService(true, result.message);
+        }
+      },
+      error: (err: any) => {
+        this._notificationService.warning('Información de sistema nº: '+ err.status , 'Mensaje: ' + err.error.msg, 6000);
+      },
+      complete: () => {
+        console.log('complete');
       }
-    },
-    error => {
-      this._notificationService.warning('Información de sistema nº: '+ error.status , 'Mensaje: ' + error.error.msg, 6000);
     });
   }
 
   hideCard(){
-    this.showCardBrand = false;
-    this.showCardRightUser = false;
+    this.showUserCard = false;
+    this.showUserRightCard = false;
   }
 
   close(){
-    this.brandsForm.reset();
-    for (let name in this.brandsForm.controls) {
-      this.brandsForm.controls[name].setErrors(null);
+    this.userForm.reset();
+    for (let name in this.userForm.controls) {
+      this.userForm.controls[name].setErrors(null);
     }
     this.newInventoryModal.hide();
   }
@@ -213,8 +232,10 @@ export class UsersComponent implements OnInit {
 
     setTimeout(() =>{
       const search_marcas = document.getElementById("search_marcas") as HTMLInputElement;
-      if(search_marcas)
-      search_marcas.setAttribute('placeholder',"Buscar");
+      if(search_marcas){
+       search_marcas.setAttribute('placeholder',"Buscar"); 
+      }
+      
     },1);
   }
 }

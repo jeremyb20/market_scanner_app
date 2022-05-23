@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+<div *ngIf="Media.IsLandscape" class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
   <div class="header">
     <h1 class="title">
       <img src="../../../assets/images/slogan-white.png" class="w-100 shadow-1-strong rounded mb-1" alt="test"/>
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div *ngIf="navigation" class="content">
-    <nav id="nav" class="nav">
+    <nav aria-label="navigation" id="nav" class="nav">
       <div class="nav_list" *ngFor="let item of navigation; let i = index" style="    width: -webkit-fill-available;   width: -moz-available;   ">
         <a *ngIf="item.EISubMenu.length == 0" (click)="goTo(item.routerLink)" [routerLinkActive]="['active']" [ngClass]="{'active': actualRouter == item.routerLink}" class="nav_link"> <i class='{{item.iconClass}} nav_icon me-1' ></i> <span class="nav_name">{{ item.translate | translate }}</span> </a>
         <div *ngIf="item.EISubMenu.length > 0" class="accordion accordion-flush" id="accordionFlushExample">
@@ -45,4 +45,56 @@
   </div>
   </div>
 
+</div>
+
+<div *ngIf="!Media.IsLandscape" class="offcanvas offcanvas-start sidebar" id="sidebar-menu" [ngClass]="{'expanded': isExpanded }" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header header">
+    <h1 class="title">
+      <img src="../../../assets/images/slogan-white.png" class="w-100 shadow-1-strong rounded mb-1" alt="test"/>
+    </h1>
+    <div class="toggle" data-bs-dismiss="offcanvas" aria-label="Close">
+      <span class="chevron"></span>
+    </div>
+  </div>
+  <div class="offcanvas-body p-0">
+    <div>
+      <div *ngIf="navigation" class="content">
+        <nav aria-label="navigation" id="nav" class="nav">
+          <div class="offcanvas offcanvas-start"  class="nav_list" *ngFor="let item of navigation; let i = index" style="    width: -webkit-fill-available;   width: -moz-available;   ">
+            <a data-bs-dismiss="offcanvas" *ngIf="item.EISubMenu.length == 0" (click)="goTo(item.routerLink)" [routerLinkActive]="['active']" [ngClass]="{'active': actualRouter == item.routerLink}" class="nav_link"> <i class='{{item.iconClass}} nav_icon me-1' ></i> <span class="nav_name">{{ item.translate | translate }}</span> </a>
+            <div *ngIf="item.EISubMenu.length > 0" class="accordion accordion-flush" id="accordionFlushExample">
+              <div class="accordion-item">
+                <span id="flush-headingOne {{item.IdMenu}}">
+                  <button class="accordion-button collapsed" (click)='toggle(i)' data-bs-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                    <i class='{{item.iconClass}} nav_icon acordion-icon'></i> <span class="nav_name me-1">{{ item.translate | translate }}</span>
+                  </button>
+                </span>
+                <div [@collapse]="!openAccordion[i]" [attr.id]="'collapse'" class="accordion-collapse collapse show" [class.show]='openAccordion[i]' [attr.aria-labelledby]="'heading' + i">
+                  <div class="accordion-body" *ngFor="let val of item.EISubMenu" [ngClass]="{ 'hide-padding': !isExpanded }">
+                    <a data-bs-dismiss="offcanvas" (click)="goTo(val.routerLink)" [ngClass]="{'active': actualRouter == val.routerLink}"  [routerLinkActive]="['active']" class="nav_link mb-1"> <i class='{{val.iconClass}} nav_icon' style="margin-right: 6px;"></i> <span class="nav_name">{{ val.translate | translate }}</span> </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="footer">
+        <div class="dropdown py-3 dropup">
+          <a href="/opciones" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle ms-1" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="hugenerd" width="30" height="30" class="rounded-circle">
+              <span class="ms-2">{{nameUser}}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow dropdown-left" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" [routerLink]="'/profile'"><i class='fas fa-user nav_icon me-2'></i> Perfil</a></li>
+              <li><a class="dropdown-item" [routerLink]="'/configuration'"><i class="fas fa-cog nav_icon me-2"></i> Configuración</a></li>
+              <li>
+                  <hr class="dropdown-divider">
+              </li>
+              <li><a (click)="logout()" class="dropdown-item" href="#"><i class='fas fa-sign-out-alt nav_icon me-2'></i>  {{ 'USER.NAVBAR.LOGOUT' | translate }}</a></li>
+          </ul>
+      </div>
+      </div>
+    </div>
+  </div>
 </div>

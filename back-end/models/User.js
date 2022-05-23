@@ -8,6 +8,7 @@ const userSchema = new Schema({
   password: {type: String, required:true},
   lang: {type: String, required:true},
   theme: {type: String, required:true},
+  userRol: {type: String, required: true}
 },{
   timestamps: true,
   versionKey: false
@@ -21,7 +22,7 @@ userSchema.methods.encryptPassword = async (password) => {
 const User =  module.exports = model("User", userSchema);
 
 module.exports.addUser = function(newUser, callback) {
-  bcrypt.genSalt(10, (err, salt) => {
+  bcrypt.genSalt(10, (_err, salt) => {
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if(err) throw err;
       newUser.password = hash;

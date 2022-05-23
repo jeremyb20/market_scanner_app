@@ -10,15 +10,14 @@ userCtl.getUsers = async ( _req,res )=> {
   users.forEach(element => {
     const test = moment(element.createdAt).format('l');
     element.createdAt = test
-    console.log(element);
   });
   res.json({listaUsuarios: users, success: true});
 }
 
 userCtl.registerUser = async( req,res ) => {
-  const newUser = new User(req.body);
-
-  User.addUser(newUser,async(err, user, done) => {
+  const { email,password,theme,userRol,username,lang } = req.body;
+  const newUser = new User({email,password,theme,userRol,username,lang});
+  User.addUser(newUser,async(_err, user, _done) => {
     try {
       if(!user){
         return res.json({success: false, message: 'El correo ya existe..!'});
@@ -32,6 +31,11 @@ userCtl.registerUser = async( req,res ) => {
   });
 }
 
+userCtl.editUser = async ( req,res )=> {
+  await User.findByIdAndUpdate(req.body._id, req.body);
+  res.send({success: true, message: 'Usuario actualizado'});
+}
+
 userCtl.loginUser = async( req,res )=> {
   const { email, password  } = req.body;
   User.checkIfEmailExist(email, (err, user) => {
@@ -40,8 +44,8 @@ userCtl.loginUser = async( req,res )=> {
       return res.json({success: false, message: 'El correo no existe'});
     }
 
-    User.comparePassword(password, user.password, (err, isMatch) => {
-      if(err) throw err;
+    User.comparePassword(password, user.password, (_err, isMatch) => {
+      if(_err) throw _err;
       if(isMatch) {
         const token = jwt.sign({data: user}, process.env.SECRET, {
           expiresIn: 604800   // 1 week: 604800//  1 day 1440 //60 one minute
@@ -52,7 +56,8 @@ userCtl.loginUser = async( req,res )=> {
           email: user.email,
           updatedAt: user.updatedAt,
           theme: user.theme,
-          lang: user.lang
+          lang: user.lang,
+          userRol: user.userRol
         }
         res.json({
           success: true,
@@ -71,10 +76,6 @@ userCtl.getUserById = async ( req,res )=> {
   const user =  await User.findById(req.params.id);
   res.send({success: true, usuario: user});
 
-}
-userCtl.editUser = async ( req,res )=> {
-  await User.findByIdAndUpdate(req.params.id, req.body);
-  res.send({success: true, message: 'Usuario actualizado'});
 }
 
 userCtl.deleteUser = async( req,res )=> {

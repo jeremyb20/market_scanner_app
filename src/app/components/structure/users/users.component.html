@@ -1,12 +1,12 @@
 <div class="row g-0">
-  <div [ngClass]="{'col-sm-8': showCardBrand, 'col-sm-12':!showCardBrand}">
+  <div [ngClass]="{'col-sm-8': showUserCard, 'col-sm-12':!showUserCard}">
     <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data" [options]="options" [columns]="columns">
         <ngx-caption>
             <div class="row p-1">
                 <div class="col-sm-6 col-xs-6 col-6 ">
                     <b>
                     <i class="fa fa-table" aria-hidden="true"></i>
-                        Usuarios Smart Shop
+                        Lista de Usuarios
                     </b>
                 </div>
                 <div class="col-sm-6 col-xs-6 col-6  text-end">
@@ -17,37 +17,63 @@
             </div>
         </ngx-caption>
         <ng-template #actionEditAndDelete let-row let-rowIndex="rowIndex" let-columnValue="columnValue">
-          <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit" (click)="createOrEditModalUser(row, 'Editar Marca', false)"><i class="fas fa-pencil-alt me-3 text-primary"></i> </a>
+          <a data-toggle="tooltip" data-placement="top" title="Editar" data-original-title="Edit" (click)="createOrEditModalUser(row, 'Editar Usuario', false)"><i class="fas fa-pencil-alt me-3 text-primary"></i> </a>
           <a data-toggle="tooltip" data-placement="top" title="Eliminar" data-original-title="Close" (click)="deleteUser(row)"><i class="fas fa-trash text-danger"></i></a>
         </ng-template>
     </ngx-datatable>
   </div>
-  <div *ngIf="showCardRightUser" class="col-sm-4 px-3">
+  <div *ngIf="showUserRightCard" class="col-sm-4 px-3">
     <div class="homeBody">
       <div class="modal-content shadow">
         <div class="modal-header">
           <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
           <button type="button" (click)="hideCard()" class="btn-close btn-close-white" aria-label="Close"></button>
         </div>
-        <form class="form-signin" [formGroup]="brandsForm" (ngSubmit)="onSubmit()">
+        <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div class="modal-body">
             <div class="form-group mb-2">
-              <label class="mb-0 fw-bold">Código Marca</label>
+              <label class="mb-0 fw-bold">Nombre del usuario</label>
               <div class="input-group input-wrap-password">
-                <input name="codigoMarca" formControlName="codigoMarca" class="form-control" id="codigoMarca" [ngClass]="{ 'is-invalid': submitted && f.codigoMarca.errors }" placeholder="Inserte el código">
-                <div *ngIf="submitted && f.codigoMarca.errors" class="invalid-feedback">
-                  <div *ngIf="f.codigoMarca.errors.required">Código marca es requerida</div>
+                <input name="username" formControlName="username" class="form-control" id="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Inserte el nombre">
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Nombre del usuario es requerida</div>
                 </div>
               </div>
             </div>
             <div class="form-group mb-2">
-              <label class="mb-0 fw-bold">Descripción marca</label>
+              <label class="mb-0 fw-bold">Correo electrónico</label>
               <div class="input-group input-wrap-password">
-                <input name="descripcionMarca" formControlName="descripcionMarca" class="form-control" id="descripcionMarca" [ngClass]="{ 'is-invalid': submitted && f.descripcionMarca.errors }" placeholder="Inserte la descripción">
-                <div *ngIf="submitted && f.descripcionMarca.errors" class="invalid-feedback">
-                  <div *ngIf="f.descripcionMarca.errors.required">Descripción marca es requerida</div>
+                <input name="email" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Ingrese el correo">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Correo electrónico es requerida</div>
                 </div>
               </div>
+            </div>
+            <div *ngIf="editOrNewOption" class="form-group mb-2">
+              <label class="mb-0 fw-bold">Contraseña</label>
+              <div class="input-group input-wrap-password">
+                <input type="password" name="password" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Ingrese una contraseña">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <label class="mb-2 fw-bold">Rol de usuario</label>
+              <select formControlName="userRol" class="form-select custom-select-lg mb-3">
+                <option value="Empleado">Empleado</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Administrador">Administrador</option>
+              </select>
+            </div>
+            <div class="form-group mb-2">
+              <label class="mb-2 fw-bold">Color del tema</label>
+              <select formControlName="theme" class="form-select custom-select-lg mb-3">
+                <option value="theme-default">Tema por defecto</option>
+                <option value="theme-gradient">Tema gradiente</option>
+                <option value="theme-default-dark">Tema oscuro</option>
+                <option value="theme-premium">Tema premium</option>
+              </select>
             </div>
             <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
               <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
@@ -73,32 +99,58 @@
         <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form class="form-signin" [formGroup]="brandsForm" (ngSubmit)="onSubmit()">
+      <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="modal-body">
           <div class="form-group mb-2">
-            <label class="mb-0 fw-bold">Código Marca</label>
+            <label class="mb-0 fw-bold">Nombre del usuario</label>
             <div class="input-group input-wrap-password">
-              <input name="codigoMarca" formControlName="codigoMarca" class="form-control" id="codigoMarca" [ngClass]="{ 'is-invalid': submitted && f.codigoMarca.errors }" placeholder="Inserte el código">
-              <div *ngIf="submitted && f.codigoMarca.errors" class="invalid-feedback">
-                <div *ngIf="f.codigoMarca.errors.required">Código marca es requerida</div>
+              <input name="username" formControlName="username" class="form-control" id="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Inserte el nombre">
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Nombre del usuario es requerida</div>
               </div>
             </div>
           </div>
           <div class="form-group mb-2">
-            <label class="mb-0 fw-bold">Descripción marca</label>
+            <label class="mb-0 fw-bold">Correo electrónico</label>
             <div class="input-group input-wrap-password">
-              <input name="descripcionMarca" formControlName="descripcionMarca" class="form-control" id="descripcionMarca" [ngClass]="{ 'is-invalid': submitted && f.descripcionMarca.errors }" placeholder="Inserte la descripción">
-              <div *ngIf="submitted && f.descripcionMarca.errors" class="invalid-feedback">
-                <div *ngIf="f.descripcionMarca.errors.required">Descripción marca es requerida</div>
+              <input name="email" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Ingrese el correo">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Correo electrónico es requerida</div>
               </div>
             </div>
+          </div>
+          <div *ngIf="editOrNewOption" class="form-group mb-2">
+            <label class="mb-0 fw-bold">Contraseña</label>
+            <div class="input-group input-wrap-password">
+              <input type="password" name="password" formControlName="password" class="form-control" id="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Ingrese una contraseña">
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Contraseña es requerida</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <label class="mb-2 fw-bold">Rol de usuario</label>
+            <select formControlName="userRol" class="form-select custom-select-lg mb-3">
+              <option value="Empleado">Empleado</option>
+              <option value="Usuario">Usuario</option>
+              <option value="Administrador">Administrador</option>
+            </select>
+          </div>
+          <div class="form-group mb-2">
+            <label class="mb-2 fw-bold">Color del tema</label>
+            <select formControlName="theme" class="form-select custom-select-lg mb-3">
+              <option value="theme-default">Tema por defecto</option>
+              <option value="theme-gradient">Tema gradiente</option>
+              <option value="theme-default-dark">Tema oscuro</option>
+              <option value="theme-premium">Tema premium</option>
+            </select>
           </div>
           <div *ngIf="hideMsg" class="alert alert-warning error-message text-center mt-3" role="alert">
             <strong class="text-center"><i class="fas fa-times-circle mt-1 mr-3"></i> {{ ShowMsg }}</strong>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="hideCard()">Cancelar</button>
           <button type="submit" class="btn btn-block btn-home btn-sm">
             {{buttonText}}
           </button>

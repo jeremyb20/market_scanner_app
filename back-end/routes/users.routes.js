@@ -5,13 +5,13 @@ const verification = require('./../config')
 
 router.get('/getUsers', verification, userCtl.getUsers);
 
-router.post('/register',userCtl.registerUser);
+router.post('/registerUser',userCtl.registerUser);
 
 router.post('/login',userCtl.loginUser);
 
 router.get('/:id',userCtl.getUserById);
 
-router.put('/edit/:id',userCtl.editUser);
+router.post('/editUser',userCtl.editUser);
 
 router.post('/setThemeUser',userCtl.editTheme);
 

@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return next.handle(this.clonedReq).pipe(
         tap(
-          succ =>{
+          _succ =>{
             // This is intentional
           },
           err=> {

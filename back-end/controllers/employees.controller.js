@@ -2,7 +2,7 @@ const employeeCtl = {}
 
 const Employee = require('../models/Employee')
 
-employeeCtl.getEmployees = async ( req,res )=> {
+employeeCtl.getEmployees = async ( _req,res )=> {
   const employees = await Employee.find()
   res.send({listaEmpleados: employees, success: true});
 }

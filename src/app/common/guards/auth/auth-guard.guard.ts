@@ -29,26 +29,26 @@ export class AuthGuard implements CanActivate {
       if( this.authService.getUserRole() != 'Administrador' ){
         if(!this.hasPermissionByMenu){
           if(event.url != '/profile' && event.url != '/login' && event.url != '/configuration'){
-            this.location.back();
+            this.router.navigate(['/dashboard'])
           }
         }
 
         return true;
       }else {
-        this.location.back();
+        this.router.navigate(['/dashboard'])
         return false;
       }
     });
   }
 
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    _route: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if( this.authService.getUserRole() != 'Administrador' ){
+      if( this.authService.getUserRole() == 'Usuario' ){
         return true;
       }else {
-        this.location.back();
+        this.router.navigate(['/admin'])
         return false;
       }
   }

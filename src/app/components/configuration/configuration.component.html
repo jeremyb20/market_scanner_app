@@ -42,10 +42,11 @@
         <h4>{{ 'HOME.TITLE' | translate }}</h4>
         <label>
           {{ 'HOME.SELECT' | translate }}
-          <select class="form-select" #langSelect  (change)="changetranslator(langSelect.value)">
+          <select class="form-select" #langSelect (change)="changetranslator(langSelect.value)">
             <option *ngFor="let lang of _translate.getLangs()" [value]="lang" [selected]="lang === _translate.currentLang()">{{ lang }}</option>
           </select>
         </label>
+        <a data-bs-toggle="modal" data-bs-target="#passwordModal" class="dropdown-item"><i class="fas fa-lock nav_icon me-2"></i>  Cambiar Contraseña</a>
       </div>
     </div>
   </div>

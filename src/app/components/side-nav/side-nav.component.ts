@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, Output, OnInit, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import { AuthService } from "src/app/services/auth/auth.service";
@@ -7,6 +7,7 @@ import { NotificationService } from "src/app/services/notification.service";
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { NAVIGATION } from "src/app/common/constants";
 import Swal from 'sweetalert2';
+declare var bootstrap: any;
 
 const DEFAULT_DURATION = 200;
 
@@ -38,10 +39,11 @@ export class SideNavComponent implements OnInit {
   hasSub:any = [];
   changeDetected: any;
   nameUser: any;
+  hidebackdrop: any;
 
   private mediaSubscription: Subscription
 
-  constructor(private _authService: AuthService, private _media: MediaService, private _notificationService: NotificationService, private router: Router) {
+  constructor(private el: ElementRef, private _authService: AuthService, private _media: MediaService, private _notificationService: NotificationService, private router: Router) {
     this.idUser = this._authService.getUserIdLocal();
     this.nameUser = this._authService.getUserNameLocal();
     this.actualRouter = this._authService.getRouterLink();
@@ -54,7 +56,9 @@ export class SideNavComponent implements OnInit {
     }, 1000)
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //oninit
+  }
 
   toggle(i:any){
     this.openAccordion[i] = !this.openAccordion[i];

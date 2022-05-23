@@ -96,7 +96,7 @@ export class AuthService {
   }
 
   postCreateOrEditUser(isNew:boolean, data:any):Observable<any>  {
-    this.url = (isNew) ? '/Marcas/Create_Marca': '/Marcas/Modify_Marca';
+    this.url = (isNew) ? '/users/registerUser': '/users/editUser';
     return this._http.post(`${environment.ws}`+this.url, data, {headers:this.headers});
   }
 
@@ -128,7 +128,7 @@ export class AuthService {
   }
 
   getUserRole() {
-    return localStorage.getItem('user_role');
+    return localStorage.getItem('userRol');
   }
 
   getCompanyDefault() {
@@ -159,7 +159,7 @@ export class AuthService {
 //Local methods
 
   authenticateUserLocal(data: any, token:any) {
-    localStorage.setItem('user_role','Usuario');
+    localStorage.setItem('userRol',data.userRol);
     localStorage.setItem('lang', data.lang);
     localStorage.setItem('theme', data.theme);
     localStorage.setItem('idUser', data.id);
