@@ -42,6 +42,7 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { InventoryComponent } from './components/structure/inventory/inventory.component';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { UsersComponent } from './components/structure/users/users.component';
+import { EmployeesComponent } from './components/structure/employees/employees.component';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -74,7 +75,8 @@ export function tokenGetter() {
     ConfigurationComponent,
     InventoryComponent,
     ScannerComponent,
-    UsersComponent
+    UsersComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,

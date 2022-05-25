@@ -92,11 +92,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="newInventoryModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="newInventoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="newUserModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="newUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+        <h5 class="modal-title text-center" id="newUserModalLabel">{{title}}</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -129,7 +129,7 @@
             </div>
           </div>
           <div class="form-group mb-2">
-            <label class="mb-2 fw-bold">Rol de usuario</label>
+            <label class="mb-2 fw-bold">Rol del empleado</label>
             <select formControlName="userRol" class="form-select custom-select-lg mb-3">
               <option value="Empleado">Empleado</option>
               <option value="Usuario">Usuario</option>

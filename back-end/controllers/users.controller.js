@@ -6,12 +6,25 @@ const moment = require('moment');
 
 userCtl.getUsers = async ( _req,res )=> {
   const users = await User.find();
+  const listaUsuarios = [];
 
   users.forEach(element => {
-    const test = moment(element.createdAt).format('l');
-    element.createdAt = test
+    if(element.userRol == 'Usuario'){
+      listaUsuarios.push(element);
+    }
   });
-  res.json({listaUsuarios: users, success: true});
+  res.json({listaUsuarios: listaUsuarios, success: true});
+}
+
+userCtl.getEmployees = async ( _req,res )=> {
+  const users = await User.find();
+  const employees = [];
+  users.forEach(element => {
+    if(element.userRol == 'Empleado' || element.userRol == 'Administrador'  ){
+      employees.push(element);
+    }
+  });
+  res.json({listaEmpleados: employees, success: true});
 }
 
 userCtl.registerUser = async( req,res ) => {
@@ -79,7 +92,7 @@ userCtl.getUserById = async ( req,res )=> {
 }
 
 userCtl.deleteUser = async( req,res )=> {
-  await User.findByIdAndDelete(req.params.id);
+  await User.findByIdAndDelete(req.body._id);
   res.send({success: true, message: 'Usuario eliminado'});
 }
 

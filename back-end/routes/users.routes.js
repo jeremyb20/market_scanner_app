@@ -5,6 +5,8 @@ const verification = require('./../config')
 
 router.get('/getUsers', verification, userCtl.getUsers);
 
+router.get('/getEmployees', verification, userCtl.getEmployees);
+
 router.post('/registerUser',userCtl.registerUser);
 
 router.post('/login',userCtl.loginUser);
@@ -15,6 +17,6 @@ router.post('/editUser',userCtl.editUser);
 
 router.post('/setThemeUser',userCtl.editTheme);
 
-router.delete('/delete/:id',userCtl.deleteUser);
+router.post('/deleteUser',userCtl.deleteUser);
 
 module.exports = router;
