@@ -154,14 +154,13 @@ constructor(private titleService: Title, private themeService: ThemeService, pri
 }
 
   ngOnInit(): void {
-   // var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    var today = new Date();
-    var d;
-    var month;
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const today = new Date();
+    let d;
+    let month;
     const months = []
     
-    for(var i = 7; i > 0; i -= 1) {
+    for(let i = 7; i > 0; i -= 1) {
       d = new Date(today.getFullYear(), today.getMonth() - i, 1);
       month = monthNames[d.getMonth()];
       months.push(month);

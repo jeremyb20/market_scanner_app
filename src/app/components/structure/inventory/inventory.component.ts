@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MediaResponse, MediaService } from 'src/app/services/media.service';
 import { Options } from 'src/app/common/constants';
-declare var bootstrap :any;
+declare let bootstrap :any;
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
