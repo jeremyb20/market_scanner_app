@@ -20,10 +20,18 @@
   "ADMIN": {
     "NAVBAR": {
       "PERMISSIONS": "Permisos",
-      "CONFIGURATION": {
+      "PROFILE": "Mi cuenta",
+      "OPTIONS": {
+        "TEXT":"Opciones",
         "PROFILE": "Mi Perfil",
         "CONFIGURATION": "configuración",
         "LOGOUT": "Cerrar Sesión"
+      },
+      "STRUCTURES": {
+        "TEXT": "Mantenimientos",
+        "INVENTORY": "Inventario",
+        "USERS": "Usuarios",
+        "EMPLOYEES": "Empleados"
       }
     }
   },
@@ -31,11 +39,6 @@
     "NAVBAR": {
       "DASHBOARD": "Panel",
       "SCANNER": "Scanner",
-      "STRUCTURES": {
-        "TEXT": "Mantenimientos",
-        "INVENTORY": "Inventario",
-        "USERS": "Usuarios"
-      },
       "SELLERS": {
         "TEXT": "Vendendores",
         "MAINTENANCESELLERS": "Mantenimiento",

@@ -31,7 +31,7 @@ export interface Navigation {
   routerLink: string;
   iconClass: string;
   translate: string;
-  hasPermission: Boolean;
+  hasPermission: boolean;
   EISubMenu: any;
 }
 
@@ -82,29 +82,41 @@ export const NAVIGATION: Navigation[] = [
     translate: 'USER.NAVBAR.SCANNER',
     hasPermission: true,
     EISubMenu: []
+  }
+];
+
+export const NAVIGATION_ADMIN: Navigation[] = [
+  {
+      Id:2,
+      routerLink: '/permissions',
+      iconClass: 'fas fa-user-lock',
+      translate: 'ADMIN.NAVBAR.PERMISSIONS',
+      hasPermission: true,
+      EISubMenu: []
   },
   {
-    Id:13,
-    routerLink: '',
-    iconClass: 'fas fa-industry',
-    translate: 'USER.NAVBAR.STRUCTURES.TEXT',
+    Id:4,
+    routerLink: '/structures/inventory',
+    iconClass: 'fas fa-truck-moving',
+    translate: 'ADMIN.NAVBAR.STRUCTURES.INVENTORY',
     hasPermission: true,
-    EISubMenu: [
-      {
-        Id:18,
-        routerLink: '/structures/inventory',
-        iconClass: 'fas fa-truck-moving',
-        translate: 'USER.NAVBAR.STRUCTURES.INVENTORY',
-        hasPermission: true
-      },
-      {
-        Id:18,
-        routerLink: '/structures/users',
-        iconClass: 'fas fa-users',
-        translate: 'USER.NAVBAR.STRUCTURES.USERS',
-        hasPermission: true
-      }
-    ]
+    EISubMenu: []
+  },
+  {
+    Id:5,
+    routerLink: '/structures/users',
+    iconClass: 'fas fa-users',
+    translate: 'ADMIN.NAVBAR.STRUCTURES.USERS',
+    hasPermission: true,
+    EISubMenu: []
+  },
+  {
+    Id:6,
+    routerLink: '/structures/employees',
+    iconClass: 'fas fa-users-cog',
+    translate: 'ADMIN.NAVBAR.STRUCTURES.EMPLOYEES',
+    hasPermission: true,
+    EISubMenu: []
   }
 ];
 

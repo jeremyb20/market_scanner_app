@@ -11,13 +11,13 @@ import { MediaResponse, MediaService } from 'src/app/services/media.service';
 import { Options } from 'src/app/common/constants';
 declare var bootstrap :any;
 
-
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-employees',
+  templateUrl: './employees.component.html',
+  styleUrls: ['./employees.component.scss']
 })
-export class UsersComponent implements OnInit {
+
+export class EmployeesComponent implements OnInit {
   private mediaSubscription: Subscription;
   Media: MediaResponse;
   @ViewChild('actionEditAndDelete', { static: true }) actionEditAndDelete: TemplateRef<any>;
@@ -35,13 +35,13 @@ export class UsersComponent implements OnInit {
   showUserCard: boolean = false;
   showUserRightCard: boolean = false;
   ShowMsg: string = '';
-  newUserModal: any;
+  newEmployeeModal: any;
   title: any =  '';
   buttonText: any = '';
   editOrNewOption: boolean;
 
   constructor(private _media: MediaService, private titleService: Title, private formBuilder: FormBuilder, private themeService: ThemeService, private http: HttpClient, private _authService: AuthService, private _notificationService: NotificationService) {
-    this.titleService.setTitle('Lista de Usuarios  | Smart Shop');
+    this.titleService.setTitle('Lista de Empleados  | Smart Shop');
     this.currentTheme = this.themeService.getThemeSelected();
     this.getUserByCatalog();
 
@@ -65,17 +65,16 @@ export class UsersComponent implements OnInit {
         userRol: ['',Validators.required],
         password: ['',Validators.required],
         theme: ['',Validators.required]
-
       }
     );
 
     this.columns = [
-      { key: 'username', title: 'Nombre', width: 100,pinned: false, sorting: true },
-      { key: 'email', title: 'Correo', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
-      { key: 'userRol', title: 'Rol de usuario', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
-      { key: 'theme', title: 'Color del Tema', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
-      { key: 'createdAt', title: 'Fecha Creación', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
-      { key: 'updatedAt', title: 'Fecha actualización', align: { head: 'center', body: 'center' }, width: 100, sorting: true },
+      { key: 'username', title: 'Nombre', align: { head: 'center', body:  'center' }, width: 200,pinned: false, sorting: true },
+      { key: 'email', title: 'Correo', align: { head: 'center', body: 'center' }, width: 200, sorting: true },
+      { key: 'userRol', title: 'Rol de usuario', align: { head: 'center', body: 'center' }, width: 200, sorting: true },
+      { key: 'theme', title: 'Color del Tema', align: { head: 'center', body: 'center' }, width: 200, sorting: true },
+      { key: 'createdAt', title: 'Fecha Creación', align: { head: 'center', body: 'center' }, width: 200, sorting: true },
+      { key: 'updatedAt', title: 'Fecha actualización', align: { head: 'center', body: 'center' }, width: 200, sorting: true },
       { key: 'accion', title: '<div class="blue">Acción</div>', align: { head: 'center', body:  'center' }, sorting: false, width: 80, cellTemplate: this.actionEditAndDelete }
     ];
 
@@ -83,10 +82,10 @@ export class UsersComponent implements OnInit {
   }
 
   getUserByCatalog(){
-    this._authService.getUserAll().subscribe({
+    this._authService.getAllEmployees().subscribe({
       next: (result: any) => {
         if(result.success) {
-          this.data = result.listaUsuarios;
+          this.data = result.listaEmpleados;
         }else{
           this.options.emptyDataMessage = result.message;
         }
@@ -127,7 +126,7 @@ export class UsersComponent implements OnInit {
         this.showUserRightCard = false;
       }
     }else{
-      this.newUserModal.show();
+      this.newEmployeeModal.show();
     }
   }
 
@@ -143,10 +142,10 @@ export class UsersComponent implements OnInit {
       confirmButtonText: 'Si, elimínelo!'
     }).then((res) => {
       if (res.isConfirmed) {
-        var user = {
+        var cost = {
           _id: item._id
         }
-        this._authService.deleteUser(user).subscribe({
+        this._authService.deleteUser(cost).subscribe({
           next: (result: any) => {
             if (result.success) {
               this.swalMessageResponseByservice('Eliminado!',result.message,'success');
@@ -214,7 +213,7 @@ export class UsersComponent implements OnInit {
     for (let name in this.userForm.controls) {
       this.userForm.controls[name].setErrors(null);
     }
-    this.newUserModal.hide();
+    this.newEmployeeModal.hide();
   }
 
   getResponseByService(hideMsg:any, responseMsg:any){
@@ -230,7 +229,7 @@ export class UsersComponent implements OnInit {
   }
 
   getModalInit(){
-    this.newUserModal = new bootstrap.Modal((<HTMLInputElement>document.getElementById("newUserModal")), {
+    this.newEmployeeModal = new bootstrap.Modal((<HTMLInputElement>document.getElementById("newEmployeeModal")), {
       keyboard: false
     });
 
@@ -243,3 +242,4 @@ export class UsersComponent implements OnInit {
     },1);
   }
 }
+

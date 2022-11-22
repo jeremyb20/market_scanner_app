@@ -83,6 +83,10 @@ export class AuthService {
     return this._http.get<any>(`${environment.ws}/users/getUsers`);
   }
 
+  getAllEmployees() {
+    return this._http.get<any>(`${environment.ws}/users/getEmployees`);
+  }
+
   getBrandsByCompany(IdCompania:any){
     return this._http.get<any>(`${environment.ws}/Marcas/Get_Marcas_Por_Compania?IdCompania=${IdCompania}`);
   }
@@ -96,12 +100,12 @@ export class AuthService {
   }
 
   postCreateOrEditUser(isNew:boolean, data:any):Observable<any>  {
-    this.url = (isNew) ? '/Marcas/Create_Marca': '/Marcas/Modify_Marca';
+    this.url = (isNew) ? '/users/registerUser': '/users/editUser';
     return this._http.post(`${environment.ws}`+this.url, data, {headers:this.headers});
   }
 
   deleteUser(data:any):Observable<any>  {
-    return this._http.post(`${environment.ws}/Marcas/Delete_Marca`, data,{headers:this.headers});
+    return this._http.post(`${environment.ws}/users/deleteUser`, data,{headers:this.headers});
   }
 
   deleteInventoryByCompany(data:any):Observable<any>  {
@@ -128,7 +132,7 @@ export class AuthService {
   }
 
   getUserRole() {
-    return localStorage.getItem('user_role');
+    return localStorage.getItem('userRol');
   }
 
   getCompanyDefault() {
@@ -159,7 +163,7 @@ export class AuthService {
 //Local methods
 
   authenticateUserLocal(data: any, token:any) {
-    localStorage.setItem('user_role','Usuario');
+    localStorage.setItem('userRol',data.userRol);
     localStorage.setItem('lang', data.lang);
     localStorage.setItem('theme', data.theme);
     localStorage.setItem('idUser', data.id);

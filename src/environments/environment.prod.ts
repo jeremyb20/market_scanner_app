@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   environmentName: 'prod',
-  ws: 'http://190.57.55.75:8081'
+  ws: 'https://super-market-qr-scanner.herokuapp.com/api'
 }

@@ -1,7 +1,12 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/services/theme.service';
+import { DomSanitizer, Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ChartType, ChartOptions, ChartDataSets } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
+import { Subscription } from 'rxjs';
+import { MediaResponse, MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-administrator',
@@ -10,10 +15,12 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 })
 
 export class AdministratorComponent implements OnInit {
-  public data = {};
+  private mediaSubscription: Subscription;
+  Media: MediaResponse;
+  title = 'theme-labo';
+  idUser: any;
+  userName: any = '';
   currentTheme: any;
-  translator:any;
-  currentLang: any;
 
   //pie options start
   public pieChartOptions: ChartOptions;
@@ -52,93 +59,114 @@ export class AdministratorComponent implements OnInit {
 //barChartOptions end
 
 
-  constructor( private themeService: ThemeService) {
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
+constructor(private titleService: Title, private themeService: ThemeService, private sanitise: DomSanitizer, private _authService: AuthService, private _notificationService: NotificationService, private _media: MediaService) {
+  this.idUser = this._authService.getUserIdLocal();
+  this.userName = this._authService.getUserRole();
+  this.titleService.setTitle('Administrador | Smart Shop');
+  this.mediaSubscription = this._media.subscribeMedia().subscribe(media => {
+    this.Media = media;
+  });
 
-    this.currentTheme = this.themeService.getThemeSelected();
+  monkeyPatchChartJsTooltip();
+  monkeyPatchChartJsLegend();
 
-    this.barChartOptions = {
-      responsive: true,
-      legend: {
-          labels: {
-            fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-            fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
-            fontSize: 17
+  this.currentTheme = this.themeService.getThemeSelected();
+
+  this.barChartOptions = {
+    responsive: true,
+    legend: {
+        labels: {
+          fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+          fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+          fontSize: 17
+        }
+      },
+    scales: {
+      yAxes: [{
+          ticks: {
+            fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+            beginAtZero: true
           }
-        },
-      scales: {
-        yAxes: [{
-            ticks: {
-              fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-              beginAtZero: true
-            }
-        }],
-        xAxes: [{
-            ticks: {
-              fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-              beginAtZero: true
-            }
-        }]
-      },
-      tooltips: {
-          titleFontColor:'#d4d4d4'
-      },
-      title: {
-        fontColor:'white'
-      }
-    };
+      }],
+      xAxes: [{
+          ticks: {
+            fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+            beginAtZero: true
+          }
+      }]
+    },
+    tooltips: {
+        titleFontColor:'#d4d4d4'
+    },
+    title: {
+      fontColor:'white'
+    }
+  };
 
-    this.lineChartColors = [
-      {
-        borderColor: (this.currentTheme == 'theme-default')? 'none': 'white',
-        backgroundColor: 'rgba(0,31,255,0.3)',
-      },
-    ];
+  this.lineChartColors = [
+    {
+      borderColor: (this.currentTheme != 'theme-default-dark')? 'none': 'white',
+      backgroundColor: 'rgba(0,31,255,0.3)',
+    },
+  ];
 
-    this.lineChartOptions = {
-      responsive: true,
-      legend: {
-        labels: {
-          fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-          fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
-          fontSize: 17
-        }
-      },
-      scales: {
-        yAxes: [{
-            ticks: {
-              fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-              beginAtZero: true
-            }
-        }],
-        xAxes: [{
-            ticks: {
-              fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-              beginAtZero: true
-            }
-        }]
-      },
-      tooltips: {
-        titleFontColor:'white'
+  this.lineChartOptions = {
+    responsive: true,
+    legend: {
+      labels: {
+        fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+        fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+        fontSize: 17
       }
-    };
+    },
+    scales: {
+      yAxes: [{
+          ticks: {
+            fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+            beginAtZero: true
+          }
+      }],
+      xAxes: [{
+          ticks: {
+            fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+            beginAtZero: true
+          }
+      }]
+    },
+    tooltips: {
+      titleFontColor:'white'
+    }
+  };
 
-    this.pieChartOptions = {
-      responsive: true,
-      legend: {
-        labels: {
-          fontColor: (this.currentTheme == 'theme-default')? 'black': 'white',
-          fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
-          fontSize: 17
-        }
-      },
-      tooltips: {
-        titleFontColor:'white'
+  this.pieChartOptions = {
+    responsive: true,
+    legend: {
+      labels: {
+        fontColor: (this.currentTheme != 'theme-default-dark')? 'black': 'white',
+        fontFamily: 'Roboto, "Helvetica Neue", sans-serif',
+        fontSize: 17
       }
-    };
+    },
+    tooltips: {
+      titleFontColor:'white'
+    }
+  };
+}
+
+  ngOnInit(): void {
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    const today = new Date();
+    let d;
+    let month;
+    const months = []
+    
+    for(let i = 7; i > 0; i -= 1) {
+      d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+      month = monthNames[d.getMonth()];
+      months.push(month);
+    }
+
+    this.lineChartLabels = months;
   }
-
-  ngOnInit(): void {}
 
 }

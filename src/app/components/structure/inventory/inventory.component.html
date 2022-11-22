@@ -1,5 +1,5 @@
 <div class="row g-0">
-  <div [ngClass]="{'col-sm-8': showCardBrand, 'col-sm-12':!showCardBrand}">
+  <div [ngClass]="{'col-sm-8': showUserCard, 'col-sm-12':!showUserCard}">
     <ngx-datatable [tableId]="'marcas'" tableClass="table table-striped table-bordered table-hover" [data]="data" [options]="options" [columns]="columns">
         <ngx-caption>
             <div class="row p-1">
@@ -141,7 +141,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="passwordModalLabel">{{title}}</h5>
+        <h5 class="modal-title text-center" id="newInventoryModalLabel">{{title}}</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form class="form-signin" [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { MediaResponse, MediaService } from 'src/app/services/media.service';
 import { Options } from 'src/app/common/constants';
-declare var bootstrap :any;
+declare let bootstrap :any;
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget
@@ -38,7 +38,7 @@ export class InventoryComponent implements OnInit {
   currentTheme: any;
   submitted: boolean = false;
   hideMsg: boolean = false;
-  showCardBrand: boolean = false;
+  showUserCard: boolean = false;
   showCardRightBrands: boolean = false;
   ShowMsg: string = '';
   newInventoryModal: any;
@@ -60,7 +60,7 @@ export class InventoryComponent implements OnInit {
     this.mediaSubscription = this._media.subscribeMedia().subscribe(media => {
       this.Media = media;
       if(this.Media.IsMobile){
-        this.showCardBrand = false;
+        this.showUserCard = false;
         this.showCardRightBrands = false;
       }
     });
@@ -134,13 +134,13 @@ export class InventoryComponent implements OnInit {
     );
 
     if(!this.Media.IsMobile){
-      this.showCardBrand = true;
-      if(this.showCardBrand){
+      this.showUserCard = true;
+      if(this.showUserCard){
         setTimeout(() => {
           this.showCardRightBrands = true;
         }, 510);
       }else{
-        this.showCardBrand  = false;
+        this.showUserCard  = false;
         this.showCardRightBrands = false;
       }
     }else{
@@ -241,7 +241,7 @@ export class InventoryComponent implements OnInit {
   }
 
   hideCard(){
-    this.showCardBrand = false;
+    this.showUserCard = false;
     this.showCardRightBrands = false;
   }
 

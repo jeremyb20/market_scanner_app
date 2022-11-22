@@ -84,14 +84,12 @@ export class ConfigurationComponent implements OnInit {
                 data.message,
                 'success'
               )
-              console.log(data);
             } else {
               Swal.fire(
                 'Ups, ha ocurrido algo!',
                 'Error en el sistema intentelo mas tarde.',
                 'error'
               )
-              console.log(data)
             }
           },
           error: (err: any) => {

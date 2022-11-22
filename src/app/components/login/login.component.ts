@@ -48,7 +48,12 @@ export class LoginComponent implements OnInit {
         next: (result: any) => {
           if (result.success) {
             this._authService.authenticateUserLocal(result.user, result.token);
-            this.router.navigate(['/dashboard']);
+            if(result.userRol == 'Usuario'){
+              this.router.navigate(['/dashboard']);
+            }else{
+              this.router.navigate(['/admin']);
+            }
+            
             this.loading = false;
           } else {
             this.loading = false;

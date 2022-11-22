@@ -69,6 +69,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   get f() { return this.resetForm.controls; }
 
+  logout(){
+    this._authService.logout();
+  }
+
   onSubmit() {
     this.submitted = true;
     if (this.resetForm.invalid) {
@@ -100,7 +104,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     error => {
       this.loading = false;
         this.hideMsg = true;
-        this.ShowMsg = 'Error de servidor favor de contactar al administrador del sitio';
+        this.ShowMsg = error;
         setTimeout(() => { this.hideMsg = false }, 6000);
 
     });

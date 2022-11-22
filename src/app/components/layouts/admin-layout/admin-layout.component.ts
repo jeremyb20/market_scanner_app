@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { MediaResponse, MediaService } from "src/app/services/media.service";
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Spinkit } from 'ng-http-loader';
+import { NAVIGATION_ADMIN } from "src/app/common/constants";
 
 declare var bootstrap: any;
 
@@ -16,11 +17,13 @@ declare var bootstrap: any;
 })
 export class AdminLayoutComponent implements OnInit {
   Media: MediaResponse;
-  private mediaSubscription: Subscription
+  private mediaSubscription: Subscription;
+  navigation_admin: any = NAVIGATION_ADMIN;
   title: string;
   sidebarExpanded : boolean;
   routeState: any;
   user:any;
+  username:any;
   selectTheme =  new FormControl('theme-default');
   currentTheme:any;
   public spinkit = Spinkit;
@@ -28,6 +31,7 @@ export class AdminLayoutComponent implements OnInit {
 
   constructor(private router: Router, private themeService: ThemeService, private _media: MediaService, private _authService: AuthService) {
     this.user = this._authService.getUserRole();
+    this.username = this._authService.getUserNameLocal();
 
     this.mediaSubscription = this._media.subscribeMedia().subscribe(media => {
       this.Media = media;
@@ -50,7 +54,7 @@ export class AdminLayoutComponent implements OnInit {
   
 
   ngOnInit(){
-    
+    //oninit
   }
 
   logout(){

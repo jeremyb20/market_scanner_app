@@ -18,36 +18,27 @@
         }
     },
     "ADMIN": {
-        "NAVBAR": {
-          "PERMISSIONS": "Permissions",
-          "CONFIGURATION": {
-            "PROFILE": "Profile",
-            "CONFIGURATION": "Settings",
-            "LOGOUT": "log out"
-          }
+      "NAVBAR": {
+        "PERMISSIONS": "Permissions",
+        "PROFILE": "Profile",
+        "OPTIONS": {
+          "TEXT":"Settings",
+          "PROFILE": "Profile",
+          "CONFIGURATION": "configuration",
+          "LOGOUT": "Log Out"
+        },
+        "STRUCTURES": {
+          "TEXT": "Structures",
+          "INVENTORY": "Inventory",
+          "USERS": "Users",
+          "EMPLOYEES": "Employees"
         }
+      }
     },
     "USER": {
         "NAVBAR": {
           "DASHBOARD": "Dashboard",
           "SCANNER": "Scanner",
-          "STRUCTURES": {
-            "TEXT": "Structures",
-            "INVENTORY": "Inventory",
-            "USERS": "Users"
-          },
-          "SELLERS": {
-            "TEXT": "Sellers",
-            "MAINTENANCESELLERS": "Maintenance Sellers",
-            "STRUCTURESELLERS": "Estructure Sellers"
-          },
-          "PROYECTS": "Proyects",
-          "OPPORTUNITIES": "Opportunities",
-          "MANAGEMENTS": "Managements",
-          "ACTIVITIES": "Activities",
-          "QUOTES": "Quotes",
-          "REPORTS": "Reports",
-          "SECURITY": "Security",
           "LOGOUT": "Logout"
         }
     }

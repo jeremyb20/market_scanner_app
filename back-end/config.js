@@ -6,9 +6,11 @@ const verification =  function verifyToken(req,res,next){
   const token = req.headers.authorization.split(' ')[1];
   if (!token)
     return res.status(401).send({ success: false, message: 'Token no existe.' });
-  jwt.verify(token,process.env.SECRET, function(err, decoded) {
-    if (err)
-    return res.status(401).send({ success: false, message: 'Token ya expiró, inicie sesión nuevamente' });
+  jwt.verify(token,process.env.SECRET, function(err, _decoded) {
+    if (err){
+     return res.status(401).send({ success: false, message: 'Token ya expiró, inicie sesión nuevamente' }); 
+    }
+    
     next();
   });
 }

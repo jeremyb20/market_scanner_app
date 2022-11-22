@@ -18,6 +18,7 @@ import { ResetComponent } from './components/reset/reset.component';
 import { StructureComponent } from './components/structure/structure.component';
 import { ScannerComponent } from './components/scanner/scanner.component';
 import { UsersComponent } from './components/structure/users/users.component';
+import { EmployeesComponent } from './components/structure/employees/employees.component';
 
 const routes: Routes = [
   {
@@ -32,14 +33,21 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AdminGuard],
     component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'admin', pathMatch: 'full' },
       { path: 'admin', component: AdministratorComponent},
       { path: 'permissions', component: PermissionsComponent},
       { path: 'configuration-admin', component: ConfigurationComponent},
       { path: 'profile-admin', component: ProfileComponent },
+      { path: 'structures', component: StructureComponent,
+        children: [
+          { path: 'inventory', component: InventoryComponent },
+          { path: 'users', component: UsersComponent },
+          { path: 'employees', component: EmployeesComponent },
+        ]
+      },
     ]
   },
   {
@@ -51,12 +59,6 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'scanner', component: ScannerComponent },
-      { path: 'structures', component: StructureComponent,
-        children: [
-          { path: 'inventory', component: InventoryComponent },
-          { path: 'users', component: UsersComponent },
-        ]
-      },
       { path: 'configuration', component: ConfigurationComponent},
     ]
   },
