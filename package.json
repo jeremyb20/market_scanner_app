@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "npm install --prefix client && npm run build --prefix client && rm -rf client/node_modules",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
