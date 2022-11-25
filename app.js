@@ -18,7 +18,7 @@ app.use(express.urlencoded({limit: "50mb", extended: false, parameterLimit:50000
 
 app.use(function (req, res, next) {
   let origin = (req.headers.host == 'localhost:8080')? '*' : 'https://market-scanner-app.vercel.app';
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
