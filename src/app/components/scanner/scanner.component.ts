@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import Swal from 'sweetalert2';
-declare var bootstrap :any;
+declare const bootstrap :any;
 
 @Component({
   selector: 'app-scanner',
