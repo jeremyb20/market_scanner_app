@@ -85,15 +85,16 @@ export const NAVIGATION: Navigation[] = [
   }
 ];
 
+
+// {
+//   Id:2,
+//   routerLink: '/permissions',
+//   iconClass: 'fas fa-user-lock',
+//   translate: 'ADMIN.NAVBAR.PERMISSIONS',
+//   hasPermission: true,
+//   EISubMenu: []
+// },
 export const NAVIGATION_ADMIN: Navigation[] = [
-  {
-      Id:2,
-      routerLink: '/permissions',
-      iconClass: 'fas fa-user-lock',
-      translate: 'ADMIN.NAVBAR.PERMISSIONS',
-      hasPermission: true,
-      EISubMenu: []
-  },
   {
     Id:4,
     routerLink: '/structures/inventory',

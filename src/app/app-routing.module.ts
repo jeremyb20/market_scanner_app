@@ -46,6 +46,7 @@ const routes: Routes = [
           { path: 'inventory', component: InventoryComponent },
           { path: 'users', component: UsersComponent },
           { path: 'employees', component: EmployeesComponent },
+          { path: 'permissions', component: PermissionsComponent},
         ]
       },
     ]

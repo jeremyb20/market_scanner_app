@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   getAllUsers() {
-    return this._http.get<any>(`${environment.ws}/Users/GetUsersAll`);
+    return this._http.get<any>(`${environment.ws}/users/getEmployees`);
   }
 
   getProfile() {
