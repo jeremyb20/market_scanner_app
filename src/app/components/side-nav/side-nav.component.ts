@@ -7,7 +7,6 @@ import { NotificationService } from "src/app/services/notification.service";
 import { AUTO_STYLE, animate, state, style, transition, trigger } from '@angular/animations';
 import { NAVIGATION } from "src/app/common/constants";
 import Swal from 'sweetalert2';
-declare var bootstrap: any;
 
 const DEFAULT_DURATION = 200;
 

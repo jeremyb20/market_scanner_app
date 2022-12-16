@@ -44,7 +44,9 @@
             ],
             "allowedCommonJsDependencies": [
               "chart.js",
-              "qrcode"
+              "qrcode",
+              "rxjs-compat",
+              "sweetalert2"
             ]
           },
           "configurations": {
